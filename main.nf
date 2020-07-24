@@ -8,7 +8,7 @@ def helpMessage() {
     The typical command for using the synapseclient
     nextflow run Sage-Bionetworks/synapse-nextflow --commands get --synid syn1234
     Mandatory arguments:
-      --commands                    Path to input data (must be surrounded with quotes)
+      --commands                    synapseclient cli commands
       --synid                       Synapse Id
       -profile                      Configuration profile to use. Can use multiple (comma separated)
                                     Available: conda, docker, singularity, awsbatch, test and more.
