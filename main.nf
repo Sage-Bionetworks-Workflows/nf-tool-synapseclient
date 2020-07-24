@@ -11,7 +11,7 @@ def helpMessage() {
       --commands                    synapseclient cli commands
       --synid                       Synapse Id
       -profile                      Configuration profile to use. Can use multiple (comma separated)
-                                    Available: conda, docker, singularity, awsbatch, test and more.
+                                    Available: conda, docker.
     """.stripIndent()
 }
 
