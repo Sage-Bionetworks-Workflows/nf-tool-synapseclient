@@ -6,7 +6,7 @@ def helpMessage() {
     log.info """
     Usage:
     The typical command for using the synapseclient
-    nextflow run synapse.nf --commands get --synid syn1234
+    nextflow run Sage-Bionetworks/synapse-nextflow --commands get --synid syn1234
     Mandatory arguments:
       --commands                    Path to input data (must be surrounded with quotes)
       --synid                       Synapse Id
