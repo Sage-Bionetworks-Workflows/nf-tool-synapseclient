@@ -27,13 +27,12 @@ if (params.command == "get")
     process synapse_get {
 
         input:
-        // val cmd from params.command
         val synid from params.synid
         // path automatically interprets string to the location of the file
         path synapseconfig from params.synapseconfig
 
         output:
-        stdout into result
+        file '*' into result
 
         script:
         """
@@ -42,8 +41,9 @@ if (params.command == "get")
         """
 
     }
+
 else
     error "Invalid synapse cmd"
 
 if (params.command == "get")
-    result.subscribe { println it }
+    result.subscribe { println "File: ${it.name}" }
