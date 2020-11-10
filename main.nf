@@ -1,6 +1,7 @@
 
 // params.command
 // params.synid
+// params.synapseconfig
 
 def helpMessage() {
     log.info """
@@ -8,7 +9,8 @@ def helpMessage() {
     The typical command for using the synapseclient
     nextflow run Sage-Bionetworks/synapse-nextflow --commands get --synid syn1234
     Mandatory arguments:
-      --commands                    synapseclient cli commands
+      --command                     synapseclient cli commands
+      --synapseconfig               Synapse config file
       --synid                       Synapse Id
       -profile                      Configuration profile to use. Can use multiple (comma separated)
                                     Available: conda, docker.
@@ -21,15 +23,27 @@ if (params.help) {
     exit 0
 }
 
-process synapse_get {
+if (params.command == "get")
+    process synapse_get {
 
-    input:
-    val cmd from params.command
-    val synid from params.synid
+        input:
+        // val cmd from params.command
+        val synid from params.synid
+        // path automatically interprets string to the location of the file
+        path synapseconfig from params.synapseconfig
 
-    script:
-    """
-    echo "synapse $cmd $synid"
-    synapse $cmd $synid
-    """
-}
+        output:
+        stdout into result
+
+        script:
+        """
+        echo "synapse -c $synapseconfig get $synid"
+        synapse -c $synapseconfig get $synid
+        """
+
+    }
+else
+    error "Invalid synapse cmd"
+
+if (params.command == "get")
+    result.subscribe { println it }

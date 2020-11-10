@@ -7,5 +7,5 @@ dependencies:
   - pandas
   - boto3
   ## bioconda packages, see above
-  - synapseclient=2.1.1
+  - synapseclient=2.2.2
   
