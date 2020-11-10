@@ -14,6 +14,9 @@ def helpMessage() {
       --command                     synapseclient cli commands
       --synapseconfig               Synapse config file
       --synid                       Synapse Id
+      --inputfile                   Synapse Id
+      --parentid                    Synapse parent id
+
       -profile                      Configuration profile to use. Can use multiple (comma separated)
                                     Available: conda, docker.
     """.stripIndent()
