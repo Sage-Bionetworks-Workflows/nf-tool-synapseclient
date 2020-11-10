@@ -2,6 +2,8 @@
 // params.command
 // params.synid
 // params.synapseconfig
+// params.inputfile
+// params.parentid
 
 def helpMessage() {
     log.info """
@@ -28,8 +30,7 @@ if (params.command == "get")
 
         input:
         val synid from params.synid
-        // path automatically interprets string to the location of the file
-        path synapseconfig from params.synapseconfig
+        file synapseconfig from file(params.synapseconfig)
 
         output:
         file '*' into result
@@ -41,9 +42,28 @@ if (params.command == "get")
         """
 
     }
+else if (params.command == "store")
+    process synapse_store {
 
+        input:
+        file filepath from file(params.inputfile)
+        val parent from params.parentid
+        file synapseconfig from file(params.synapseconfig)
+
+        output:
+        stdout into result
+
+        script:
+        """
+        echo "synapse -c $synapseconfig store $filepath --parentId $parent"
+        synapse -c $synapseconfig store $filepath --parentId $parent
+        """
+
+    }
 else
     error "Invalid synapse cmd"
 
 if (params.command == "get")
     result.subscribe { println "File: ${it.name}" }
+else if (params.command == "store")
+    result.subscribe { println it }
