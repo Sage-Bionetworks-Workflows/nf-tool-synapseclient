@@ -8,16 +8,19 @@
 def helpMessage() {
     log.info """
     Usage:
-    The typical command for using the synapseclient
-    nextflow run Sage-Bionetworks/synapse-nextflow --commands get --synid syn1234
+    nextflow run Sage-Bionetworks/synapse-nextflow --help
     Mandatory arguments:
       -profile                      Configuration profile to use. Can use multiple (comma separated)
                                     Available: conda, docker.
       --command                     synapseclient cli commands: {get, store}
       --synapseconfig               Synapse config file
+
       {get}
+      nextflow run Sage-Bionetworks/synapse-nextflow --commands get --synapseconfig ~/.synapseConfig --synid syn1234
       --synid                       Synapse Id
+
       {store}
+      nextflow run Sage-Bionetworks/synapse-nextflow --commands store --synapseconfig ~/.synapseConfig --inputfile README.md --parentid syn1234
       --inputfile                   Synapse Id
       --parentid                    Synapse parent id
 
